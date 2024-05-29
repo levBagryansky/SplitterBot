@@ -1,0 +1,6 @@
+target/
+.vscode/
+.idea/
+.classpath
+
+src/main/resources/config.json
