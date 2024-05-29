@@ -23,7 +23,7 @@ public class Bot extends TelegramLongPollingBot {
             sendMessage.setText(update.getMessage().getText());
 
             try {
-                execute(sendMessage);
+                this.execute(sendMessage);
             } catch (final TelegramApiException exc) {
                 exc.printStackTrace();
             }
