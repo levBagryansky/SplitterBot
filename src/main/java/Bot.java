@@ -1,4 +1,6 @@
 import config.BotConfig;
+import message_handlers.BotCommands;
+import message_handlers.Menu;
 import message_handlers.MessageHandler;
 import message_handlers.OnStartHandler;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -25,6 +27,11 @@ public class Bot extends TelegramLongPollingBot {
     public void onUpdateReceived(final Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
             final long chatId = update.getMessage().getChatId();
+            if (BotCommands.STRINGS.EXIT.equals(update.getMessage().getText())) {
+                this.handlers.put(chatId, new Menu());
+            } else if (BotCommands.STRINGS.START.equals(update.getMessage().getText())) {
+                this.handlers.put(chatId, new OnStartHandler());
+            }
             final var pair = this.handlers
                 .computeIfAbsent(chatId, key -> new OnStartHandler())
                 .handle(update.getMessage());

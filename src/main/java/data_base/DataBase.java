@@ -8,6 +8,6 @@ public interface DataBase {
 
     String addSplit(Split split);
 
-    Split getSplit(String code);
+    Split getSplit(String code) throws SplitNotFoundException;
 
 }

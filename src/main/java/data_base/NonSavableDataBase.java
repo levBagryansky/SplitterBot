@@ -30,9 +30,9 @@ public class NonSavableDataBase implements DataBase {
     }
 
     @Override
-    public Split getSplit(final String code) {
+    public Split getSplit(final String code) throws SplitNotFoundException {
         return Optional.ofNullable(this.base.get(code))
-            .orElseThrow(() -> new RuntimeException(
+            .orElseThrow(() -> new SplitNotFoundException(
                 String.format("Element with code %s no found", code)
                 )
             );

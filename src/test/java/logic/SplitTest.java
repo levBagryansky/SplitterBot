@@ -35,10 +35,10 @@ public class SplitTest {
     private static Map<String, Long> events2debts(final Collection<Event> events) {
         final Map<String, Long> debts = new HashMap<>();
         events.forEach(event -> {
-            debts.compute(event.sponsor,
-                (key, value) -> Objects.requireNonNullElse(value, 0L) - event.sum
+            debts.compute(event.sponsor(),
+                (key, value) -> Objects.requireNonNullElse(value, 0L) - event.sum()
             );
-            for (final var entry: event.user2consumption.entrySet()) {
+            for (final var entry: event.user2consumption().entrySet()) {
                 debts.compute(
                     entry.getKey(),
                     (key, value) -> Objects.requireNonNullElse(value, 0L) + entry.getValue()

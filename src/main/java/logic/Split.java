@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -32,7 +33,7 @@ public class Split {
 
     public synchronized void addEvent(final Event event) {
         this.events.add(event);
-        this.debts.compute(event.sponsor,
+        this.debts.compute(event.sponsor(),
             (key, value) -> {
                 if (!participants.contains(key)) {
                     throw new RuntimeException(
@@ -44,10 +45,10 @@ public class Split {
                         )
                     );
                 }
-                return Objects.requireNonNullElse(value, 0L) - event.sum;
+                return Objects.requireNonNullElse(value, 0L) - event.sum();
             }
         );
-        for (final var entry: event.user2consumption.entrySet()) {
+        for (final var entry: event.user2consumption().entrySet()) {
             this.debts.compute(
                 entry.getKey(),
                 (key, value) -> {
@@ -87,4 +88,10 @@ public class Split {
         return res;
     }
 
+    @Override
+    public String   toString() {
+        return  description +
+            "\nучастники: " + String.join(", ", this.participants) +
+            " \nЧеки:" + Arrays.toString(this.events.toArray());
+    }
 }

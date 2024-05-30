@@ -2,26 +2,25 @@ package logic;
 
 import java.util.Map;
 
-public class Event {
+public record Event(String description, Long sum, String sponsor,
+                    Map<String, Long> user2consumption) {
 
-    public final String description;
-
-    public final Map<String, Long> user2consumption;
-
-    public final Long sum;
-
-    public final String sponsor;
-
-    public Event(final String description, final Long sum, String sponsor, final Map<String, Long> user2consumption) {
+    public Event {
         final Long realSum = user2consumption.values().stream().reduce(0L, Long::sum);
         if (!sum.equals(realSum)) {
-            throw new RuntimeException(
+            throw new EventCreationFailure(
                 String.format("Sum %s is not equals to real sum %s", sum, realSum)
             );
         }
-        this.description = description;
-        this.sum = sum;
-        this.sponsor = sponsor;
-        this.user2consumption = user2consumption;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            description +
+            ", сумма =" + ((double) sum) / 100 + "руб" +
+            ", расплачивался " + sponsor +
+            ", потребляли (в копейках)" + user2consumption +
+            '}';
     }
 }

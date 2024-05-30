@@ -9,7 +9,8 @@ public class MessageAfterStartHandler implements MessageHandler {
     @Override
     public Pair<MessageHandler, SendMessage> handle(Message message) {
         return switch (message.getText()) {
-            case BotCommands.INIT_SPLIT_STRING -> new OnInitSplitHandler().handle(message);
+            case BotCommands.STRINGS.INIT_SPLIT -> new OnInitSplitHandler().handle(message);
+            case BotCommands.STRINGS.FIND_SPLIT -> new OnFindSplitHandler().handle(message);
             default -> Pair.of(
                 new MessageAfterStartHandler(),
                 MessageHandler.messageFromString(
