@@ -10,7 +10,13 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            final BotConfig config = new ObjectMapper().readValue(new File(BotConfig.PATH), BotConfig.class);
+            final BotConfig config;
+            if (args.length > 0) {
+                System.out.println(args[0]);
+                config = new BotConfig(args[0]);
+            } else {
+                config = new ObjectMapper().readValue(new File(BotConfig.PATH), BotConfig.class);
+            }
             //final DataBase dataBase = new NonSavableDataBase();
             new TelegramBotsApi(DefaultBotSession.class)
                 .registerBot(new Bot(config));
