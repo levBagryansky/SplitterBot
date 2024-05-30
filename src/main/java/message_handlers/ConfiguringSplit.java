@@ -2,6 +2,7 @@ package message_handlers;
 
 import logic.Split;
 import org.apache.commons.lang3.tuple.Pair;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 public class ConfiguringSplit implements MessageHandler {
@@ -13,10 +14,10 @@ public class ConfiguringSplit implements MessageHandler {
     }
 
     @Override
-    public Pair<MessageHandler, String> handle(Message message) {
+    public Pair<MessageHandler, SendMessage> handle(Message message) {
         return Pair.of(
             new OnStartHandler(),
-            "Дальше не прописано"
+            MessageHandler.messageFromString("Дальше не прописано")
         );
     }
 }

@@ -3,12 +3,35 @@ package message_handlers;
 import data_base.DataBase;
 import logic.Split;
 import org.apache.commons.lang3.tuple.Pair;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class OnInitSplitHandler implements MessageHandler{
+
+    @Override
+    public Pair<MessageHandler, SendMessage> handle(Message message) {
+        return Pair.of(
+            answer -> {
+                final Split split = OnInitSplitHandler.createByText(answer.getText());
+                final String tag = DataBase.instance.addSplit(split);
+                return Pair.of(
+                    new ConfiguringSplit(split),
+                    MessageHandler.messageFromString(
+                        String.format(
+                            "Вы создали сплит с тэгом `%s`\\. Теперь добавте по чеку с помощью %s\\.",
+                            tag,
+                            BotCommands.ADD_EVENT_STRING.replace("_", "\\_")
+                        ),
+                        true
+                    )
+                );
+            },
+            MessageHandler.messageFromString("Для создание сплита укажите описание и список участников в формате: Описание. участник1, участник 2, .. .")
+        );
+    }
 
     /**
      *
@@ -25,12 +48,7 @@ public class OnInitSplitHandler implements MessageHandler{
         for (String participant : participantsArray) {
             participants.add(participant.trim());
         }
-        System.out.println(description + Arrays.toString(participantsArray));
+        System.out.println(description + ": " + Arrays.toString(participants.toArray()));
         return new Split(description, participants);
-    }
-
-    @Override
-    public Pair<MessageHandler, String> handle(Message message) {
-        return null;
     }
 }
