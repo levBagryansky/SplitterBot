@@ -1,0 +1,13 @@
+---
+meta:
+  environment: jvm
+  toolchain:
+    name: maven
+    version: 17
+build:
+  artifacts:
+    build/libs/*.jar: /
+run:
+  jarName: ' BillsSplitterBot-1.0-SNAPSHOT-jar-with-dependencies.jar'
+  persistenceMount: /data
+  containerPort: 80
