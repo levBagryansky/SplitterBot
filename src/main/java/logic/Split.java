@@ -18,6 +18,10 @@ public class Split {
 
     final private Map<String, Long> debts;
 
+    public Split (final String description, final Collection<String> participants) {
+        this(description, participants, new ArrayList<>());
+    }
+
     public Split(final String description, final Collection<String> participants, final Collection<Event> events) {
         this.description = description;
         this.participants = participants;
