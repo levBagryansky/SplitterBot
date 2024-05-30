@@ -39,7 +39,7 @@ public class OnInitSplitHandler implements MessageHandler{
                     )
                 );
             },
-            MessageHandler.messageFromString("Для создание сплита укажите описание и список участников в формате: Описание. участник1, участник 2, .. .")
+            MessageHandler.messageFromString("Для создание сплита укажите описание и список участников в формате: <Описание>. <участник1>, <участник 2>, .. .")
         );
     }
 

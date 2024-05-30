@@ -89,7 +89,7 @@ public class Split {
     }
 
     @Override
-    public String   toString() {
+    public String toString() {
         return  description +
             "\nучастники: " + String.join(", ", this.participants) +
             " \nЧеки:" + Arrays.toString(this.events.toArray());

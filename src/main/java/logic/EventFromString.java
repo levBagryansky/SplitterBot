@@ -18,9 +18,9 @@ public class EventFromString implements Supplier<Event> {
         try {
             String[] parts = input.split(",");
             String description = parts[0].trim();
-            String sum = parts[1].trim();
-            String payer = parts[2].trim();
-            String[] participantsArray = Arrays.copyOfRange(parts, 3, parts.length);
+            //String sum = parts[1].trim();
+            String payer = parts[1].trim();
+            String[] participantsArray = Arrays.copyOfRange(parts, 2, parts.length);
 
             Map<String, Long> user2consumption = new HashMap<>();
             for (String participantWithAmount : participantsArray) {
@@ -30,7 +30,7 @@ public class EventFromString implements Supplier<Event> {
                 user2consumption.put(participant, (long) amount);
             }
 
-            double sumOfTheCheck = Double.parseDouble(sum) * 100;
+            double sumOfTheCheck = user2consumption.values().stream().reduce(0L, Long::sum);
 
             return new Event(description, (long) sumOfTheCheck, payer, user2consumption);
         } catch (final RuntimeException exc) {

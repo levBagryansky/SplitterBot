@@ -28,15 +28,18 @@ public class ConfiguringSplitHandler implements MessageHandler {
             case BotCommands.STRINGS.ADD_EVENT -> Pair.of(
                 new OnEventDescriptionHandler(this.currSplit),
                 MessageHandler.messageFromString(
-                    "Введите чек в формате: Описание,  сумма чека, кто оплатил, участник1 - сумма, участник2 - сумма, .. ."
+                    "Введите чек в формате: <Описание>, <кто оплатил>, <участник1> - <сумма>, <участник2> - <сумма>, .. ."
                 )
             );
             case BotCommands.STRINGS.RESULTS -> Pair.of(
                 new OnResultsHandler(this.currSplit).handle(message)
             );
             default -> Pair.of(
-                new OnStartHandler(),
-                MessageHandler.messageFromString("Дальше не прописано")
+                new ConfiguringSplitHandler(this.currSplit),
+                MessageHandler.messageFromString(
+                    "Введите команду %s для добавления чека или %s для просмотра текущих результатов",
+                    BotCommands.STRINGS.ADD_EVENT, BotCommands.STRINGS.RESULTS
+                )
             );
         };
     }
