@@ -2,12 +2,13 @@
 
 A Telegram bot that helps you split expenses with your friends.
 
-##Features
+## Features
 
 Add expenses with a simple command
 Split expenses between multiple people
 Get a summary of who owes what
-##Usage
+
+## Usage
 
 To use the bot, simply find it by nickname: `https://t.me/bills_splitter_bot`
 Contributing
