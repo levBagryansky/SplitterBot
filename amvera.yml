@@ -6,6 +6,8 @@ meta:
 build:
   artifacts:
     target/*.jar: /
+
+  args: 7448458229:AAG5x5tvqSe_LJXHWhZBLpXa81JK3mRiFEM
 run:
   jarName: target/BillsSplitterBot-1.0-SNAPSHOT-jar-with-dependencies.jar
   persistenceMount: /data
