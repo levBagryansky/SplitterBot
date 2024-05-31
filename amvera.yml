@@ -1,4 +1,3 @@
----
 meta:
   environment: jvm
   toolchain:
@@ -6,8 +5,8 @@ meta:
     version: 17
 build:
   artifacts:
-    build/libs/*.jar: /
+    target/*.jar: /
 run:
-  jarName: ' BillsSplitterBot-1.0-SNAPSHOT-jar-with-dependencies.jar'
+  jarName: target/BillsSplitterBot-1.0-SNAPSHOT-jar-with-dependencies.jar
   persistenceMount: /data
   containerPort: 80
