@@ -11,6 +11,7 @@ Get a summary of who owes what
 ## Usage
 
 To use the bot, simply find it by nickname: https://t.me/bills_splitter_bot
-Contributing
+
+## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
